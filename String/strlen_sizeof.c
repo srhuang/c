@@ -3,7 +3,7 @@ Name    :strlen_sizeof
 Author  :srhuang
 Email   :lukyandy3162@gmail.com
 History :
-    20190109 MIN and MAX
+    20190109 Initialization
 *****************************************************************/
 #include <stdio.h>
 #include <string.h>
