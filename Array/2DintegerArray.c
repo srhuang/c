@@ -1,5 +1,5 @@
 /*****************************************************************
-Name    :twoDimensionalArray
+Name    :2DintegerArray
 Author  :srhuang
 Email   :lukyandy3162@gmail.com
 History :
@@ -10,7 +10,7 @@ History :
 
 /*==============================================================*/
 int **memo;
-void twoDimensionalArray(int x, int y){
+void twoDimensionalIntegerArray(int x, int y){
     memo = (int**)malloc(sizeof(int*) * x);
     for(int i=0; i<x; i++){
         memo[i] = (int*) malloc (sizeof(int) * y);
@@ -22,7 +22,7 @@ int main(){
     int x=10;
     int y=20;
 
-    twoDimensionalArray(x, y);
+    twoDimensionalIntegerArray(x, y);
 
     //assign value
     for(int i=0; i<x; i++){
