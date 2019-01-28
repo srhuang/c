@@ -7,6 +7,7 @@ History :
 *****************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 /*==============================================================*/
 #define MIN(a,b) (((a)<(b))?(a):(b)) 
@@ -28,6 +29,17 @@ int main(){
     float ab_min = MIN(a, b);
     float ab_max = MAX(a, b);
     printf("\tmin : %f, max: %f\n", ab_min, ab_max);
+
+    //pow
+    printf("Test POW\n");
+    double answer = pow(2, 6);
+    printf("\t2 ^ 6 = %f\n", answer);
+
+    //random
+    printf("Test Random\n");
+    //0~99
+    int random = (rand()%100);
+    printf("\trand 0~99 : %d\n", random);
 
     return 0;
 }
