@@ -15,8 +15,8 @@ typedef struct Node{
 }Node;
 
 /*==============================================================*/
-Node* arrayCopy(int* array, int num){
-    printf("Copy Array to linked list : ");
+Node* arrayToLinkedList(int* array, int num){
+    printf("Array to linked list : ");
     printf("%d\t", array[0]);
     Node *head = malloc(sizeof(Node));
     head->data = array[0];
@@ -41,7 +41,7 @@ int main(){
     Node *head = NULL;
     int test_data[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-    head = arrayCopy(test_data, sizeof(test_data)/sizeof(int));
+    head = arrayToLinkedList(test_data, sizeof(test_data)/sizeof(int));
 
     //traversal and print all linked list
     printf("Print all data in linked list : ");
@@ -50,6 +50,7 @@ int main(){
         printf("%d\t", temp->data);
         temp = temp->next;
     }
+    printf("\n");
 
     return 0;
 }
