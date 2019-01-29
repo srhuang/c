@@ -9,8 +9,8 @@ History :
 #include <stdlib.h>
 
 /*==============================================================*/
-#define MAXSTACK (100)
-int stack[MAXSTACK];
+#define MAXSIZE (100)
+int stack[MAXSIZE];
 int top=-1;
 int isEmpty();
 void push(int); 
@@ -26,7 +26,7 @@ int isEmpty(){
 }
 
 void push(int data){
-    if(top>=MAXSTACK){
+    if(top>=MAXSIZE){
         printf("Stack is FULL\n"); 
     }else{
         top++;
