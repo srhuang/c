@@ -9,14 +9,16 @@ History :
 #include <stdlib.h>
 
 /*==============================================================*/
-#define MAXSIZE (10)
+#define MAXSIZE (20)
 int sequentialQ[MAXSIZE];
+
+int front=0;
+int rear=0;
+
 int isEmpty();
 int isFull();
 void push(int); 
 int pop();
-int front=0;
-int rear=0;
 
 /*==============================================================*/
 int isEmpty()
@@ -63,7 +65,7 @@ int main(){
 
     //pop
     printf("Queue pop : ");
-    for(int i=0; i<10; i++){
+    for(int i=0; i<5; i++){
         int temp = pop();
         if(temp != -1)
             printf("%d ", temp);
@@ -76,6 +78,16 @@ int main(){
         printf("%d ", i);
         push(i);
     }
+    printf("\n");
+
+    //pop
+    printf("Queue pop : ");
+    for(int i=0; i<10; i++){
+        int temp = pop();
+        if(temp != -1)
+            printf("%d ", temp);
+    }
+    printf("\n");
 
     return 0;
 }

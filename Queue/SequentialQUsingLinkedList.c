@@ -1,5 +1,5 @@
 /*****************************************************************
-Name    :SequentialQUsingArray_doubleCapacity
+Name    :SequentialQUsingLinkedList
 Author  :srhuang
 Email   :lukyandy3162@gmail.com
 History :
@@ -9,55 +9,39 @@ History :
 #include <stdlib.h>
 
 /*==============================================================*/
-int *sequentialQ;
+typedef struct Node{
+    int data;
+    struct Node *next;
+}Node;
 
-int front=0;
-int rear=0;
-int capacity=3;
+Node *front=NULL;
+Node *rear=NULL;
 
 int isEmpty();
-int isFull();
 void push(int); 
 int pop();
-void doubleCapacity();
 
 /*==============================================================*/
 int isEmpty()
 {
-    return (front == rear);
-}
-
-int isFull()
-{
-    return (rear == capacity);
-}
-
-void doubleCapacity()
-{
-    capacity *= 2;
-    int *temp = sequentialQ;
-    sequentialQ = (int*)malloc(sizeof(int) * capacity);
-    printf("\nDouble the capacity : %d\n", capacity);
-
-    //copy the data
-    int index=0;
-    for(int i=front; i<rear; i++){
-        sequentialQ[index++] = temp[i];
-    }
-    front = 0;
-    rear = index;
-    free(temp);
+    return (front == NULL);
 }
 
 void push(int data)
 {
-    if(isFull()){
-        //printf("Sequential Queue is Full.\n");
-        doubleCapacity();
+    Node *new = (Node*)malloc(sizeof(Node));
+    new->data = data;
+    new->next = NULL;
+    //push back
+    if(rear == NULL){
+        rear = new;
+    }else{
+        rear->next = new;
+        rear = new;
     }
 
-    //push back
-    sequentialQ[rear++] = data;
+    if(front == NULL)
+        front = new;
 }
 
 int pop()
@@ -68,14 +52,15 @@ int pop()
     }
 
     //pop front
-    return sequentialQ[front++];
+    Node *temp = front;
+    int data = temp->data;
+    front = temp->next;
+    free(temp);
+    return data;
 }
 
 /*==============================================================*/
 int main(){
-    //initialize queue
-    sequentialQ = (int*)malloc(sizeof(int) * capacity);
-
     //push
     printf("Sequential Queue push : ");
     for(int i=0; i<10; i++){
