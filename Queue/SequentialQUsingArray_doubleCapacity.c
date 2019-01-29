@@ -9,7 +9,6 @@ History :
 #include <stdlib.h>
 
 /*==============================================================*/
-#define MAXSIZE (10)
 int *sequentialQ;
 int isEmpty();
 int isFull();
@@ -18,6 +17,7 @@ int pop();
 void doubleCapacity();
 int front=0;
 int rear=0;
+int capacity=3;
 
 /*==============================================================*/
 int isEmpty()
@@ -27,15 +27,15 @@ int isEmpty()
 
 int isFull()
 {
-    return (rear == MAXSIZE);
+    return (rear == capacity);
 }
 
 void doubleCapacity()
 {
-    int capacity = sizeof(sequentialQ)/sizeof(int);
+    capacity *= 2;
     int *temp = sequentialQ;
-    sequentialQ = (int*)malloc(sizeof(int) * capacity * 2);
-    printf("\nDouble the capacity.\n");
+    sequentialQ = (int*)malloc(sizeof(int) * capacity);
+    printf("\nDouble the capacity : %d\n", capacity);
 
     //copy the data
     int index=0;
@@ -72,7 +72,7 @@ int pop()
 /*==============================================================*/
 int main(){
     //initialize queue
-    sequentialQ = (int*)malloc(sizeof(int) * MAXSIZE);
+    sequentialQ = (int*)malloc(sizeof(int) * capacity);
 
     //push
     printf("Sequential Queue push : ");
