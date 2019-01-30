@@ -16,6 +16,10 @@ typedef struct treeNode
     int data;
 }treeNode;
 
+void preorderTraversal(treeNode *parent);
+void inorderTraversal(treeNode *parent);
+void postorderTraversal(treeNode *parent);
+
 /*==============================================================*/
 treeNode * arrayToTree(int *array, int num)
 {
