@@ -31,6 +31,22 @@ map* mapNew()
     return newMap;
 }
 
+void mapClear(map* mapPtr)
+{
+    //free each item
+    mapItem *parsing;
+    parsing = mapPtr->head;
+    while(parsing != NULL){
+        //printf("%s %d\n", parsing->key, parsing->val);
+        mapItem *temp = parsing;
+        parsing = parsing->next;
+        free(temp);
+    }
+
+    //free map
+    free(mapPtr);
+}
+
 map* mapInsert(const char *key, int val, map* mapPtr)
 {
     //copy the new key
@@ -53,6 +69,32 @@ map* mapInsert(const char *key, int val, map* mapPtr)
     }
 
     return mapPtr;
+}
+
+int mapErase(char *key, map* mapPtr)
+{
+    mapItem *parsing = mapPtr->head;
+    mapItem *pre = mapPtr->head;
+    while(parsing != NULL){
+        //printf("%s %d\n", parsing->key, parsing->val);
+        if(strcmp(key, parsing->key) == 0){
+            //delete
+            if(parsing == mapPtr->head){
+                mapPtr->head = parsing->next;
+            }else{
+                pre->next = parsing->next;
+            }
+            free(parsing);
+            break;
+        }
+        pre = parsing;
+        parsing = parsing->next;
+    }
+
+    if(parsing == NULL)
+        return -1;
+    else
+        return 0;
 }
 
 mapItem* mapFind(char *key, map* mapPtr)
@@ -82,9 +124,19 @@ int main(){
 
     mapItem *find = mapFind("fork", cMap);
     if(find != NULL)
+        printf("Found : %s %d\n", find->key, find->val);
+    else
+        printf("Not Found.\n");
+
+    mapErase("fork", cMap);
+
+    find = mapFind("fork", cMap);
+    if(find != NULL)
         printf("%s %d\n", find->key, find->val);
     else
         printf("Not Found\n");
+
+    mapClear(cMap);
 
     return 0;
 }
