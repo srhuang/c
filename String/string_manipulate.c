@@ -11,6 +11,14 @@ History :
 #include <ctype.h>
 
 /*==============================================================*/
+//function
+//strcmp
+//strcat
+//strcpy
+//strstr
+//strchr
+//strtok
+//strncpy
 
 /*==============================================================*/
 int main(){
@@ -62,6 +70,14 @@ int main(){
         printf("%s\n", pch);
         pch = strtok(NULL, "/.,");
     }
+
+    //strncpy
+    char *test7 = "This is for string copy.";
+    printf("test7 : %s\n", test7);
+    int copySize = 6;
+    char *substring = malloc(sizeof(char) * copySize);
+    strncpy(substring, test7+12, copySize);
+    printf("substring : %s\n", substring);
 
     return 0;
 }
