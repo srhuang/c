@@ -16,6 +16,8 @@ typedef struct stack{
     int top;
 }stack;
 
+stack* newStack(int);
+void deleteStack(stack*);
 int isEmpty(stack*);
 void push(int, stack*); 
 int pop(stack*);
