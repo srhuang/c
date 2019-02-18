@@ -79,6 +79,14 @@ int main(){
     strncpy(substring, test7+12, copySize);
     printf("substring : %s\n", substring);
 
+    //replace char from string
+    printf("Replace char from string\n");
+    test[2]='z';
+    printf("test : %s\n", test);
+    //maight cause segment fault, cause the string is in executable and read-only.
+    //test2[2]='z';
+    //printf("test2 : %s\n", test2);
+
     return 0;
 }
 /*==============================================================*/
