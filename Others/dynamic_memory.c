@@ -32,6 +32,10 @@ int main(){
     }
     printf("\n");
 
+    //Testing realloc will copy the content
+    for(int i=0; i<size; i++){
+        arr2[i]=i*2;
+    }
     //Test realloc
     int *arr3 = (int*)realloc(arr2, sizeof(int) * size * 2);
     if(!arr3){ //check the NULL pointer
