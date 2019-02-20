@@ -3,6 +3,7 @@ Name    :stackUsingArray
 Author  :srhuang
 Email   :lukyandy3162@gmail.com
 History :
+    20190220 support peek and size
     20190212 Support multi-stack
     20190125 Initial Version
 *****************************************************************/
@@ -21,6 +22,8 @@ void deleteStack(stack*);
 int isEmpty(stack*);
 void push(int, stack*); 
 int pop(stack*);
+int peek(stack*);
+int size(stack*);
 
 /*==============================================================*/
 stack* newStack(int size)
@@ -49,6 +52,11 @@ int isEmpty(stack *myStack)
     }
 }
 
+int size(stack *myStack)
+{
+    return myStack->top+1;
+}
+
 void push(int data, stack *myStack)
 {
     if(myStack->top >= myStack->size){
@@ -56,6 +64,7 @@ void push(int data, stack *myStack)
     }else{
         myStack->top++;
         myStack->container[myStack->top]=data;
+        //printf("push %d into stack\n", data);
     }
 }
 
@@ -63,14 +72,28 @@ int pop(stack *myStack)
 {
     int data;
     if(isEmpty(myStack)){
-        printf("Stack is empty\n");
+        //printf("Stack is empty\n");
         return -1;
     }else{
         data=myStack->container[myStack->top];
         myStack->top--;
+        //printf("pop %d\n", data);
         return data; 
     }
 }
+
+int peek(stack *myStack)
+{
+    int data;
+    if(isEmpty(myStack)){
+        //printf("Stack is empty\n");
+        return -1;
+    }else{
+        data=myStack->container[myStack->top];
+        return data; 
+    }
+}
+
 
 /*==============================================================*/
 int main(){
