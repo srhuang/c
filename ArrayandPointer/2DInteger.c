@@ -1,5 +1,5 @@
 /*****************************************************************
-Name    :arrayAndPointer
+Name    :2DInteger
 Author  :srhuang
 Email   :lukyandy3162@gmail.com
 History :

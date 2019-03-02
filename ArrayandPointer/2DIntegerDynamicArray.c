@@ -1,5 +1,5 @@
 /*****************************************************************
-Name    :2DintegerArray
+Name    :2DIntegerDynamicArray
 Author  :srhuang
 Email   :lukyandy3162@gmail.com
 History :
