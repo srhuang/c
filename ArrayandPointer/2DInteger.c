@@ -94,7 +94,16 @@ int main(){
         printf("]\n");
     }
 
-    printf("Testing int** test6 = array\n");
+    printf("Testing test8[i] = array[i]\n");
+    int** test8 = malloc(sizeof(int*)*3);
+    for(int i=0; i<3; i++){
+        test8[i] = array[i];
+    }
+    printf("\ttest8[1]    : %p\n", test8[1]);
+    printf("\ttest8[1][1] : %d\n", test8[1][1]);
+    printf("\ttest8[2][2] : %d\n", test8[2][2]);
+
+    printf("Testing int** test7 = array\n");
     printf("Common Error for assignment of each subarray\n");
     int** test7 = array;
     for(int i=0; i<3; i++){
