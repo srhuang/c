@@ -10,99 +10,99 @@ History :
 
 /*==============================================================*/
 //Tree Node
-typedef struct treeNode
+struct TreeNode
 {
-    struct treeNode *left;
-    struct treeNode *right;
+    struct TreeNode *left;
+    struct TreeNode *right;
     int data;
-}treeNode;
-
-treeNode *root=NULL;
-
-void insert(int data);
+};
 
 //Queue Node
-typedef struct queueNode{
-    treeNode *data;
+struct queueNode{
+    struct TreeNode *data;
     struct queueNode *next;
-}queueNode;
+};
 
-queueNode *front=NULL;
-queueNode *rear=NULL;
+struct queue{
+    struct queueNode *front;
+    struct queueNode *rear;
+};
 
-int isEmpty();
-void enqueue(treeNode*); 
-treeNode* dequeue();
+int isEmpty(struct queue *q);
+void enqueue(struct queue **q, struct TreeNode*); 
+struct TreeNode* dequeue(struct queue **q);
+
+void insert(struct TreeNode **root, struct queue **q, int data);
 
 /*==============================================================*/
 //Queue operation
-int isEmpty()
+int isEmpty(struct queue *q)
 {
-    return (front == NULL);
+    return (q->front == NULL);
 }
 
-void enqueue(treeNode *data)
+void enqueue(struct queue **q, struct TreeNode *data)
 {
-    queueNode *new = (queueNode*)malloc(sizeof(queueNode));
+    struct queueNode *new = (struct queueNode*)malloc(sizeof(struct queueNode));
     new->data = data;
     new->next = NULL;
     //push back
-    if(rear == NULL){
-        rear = new;
+    if((*q)->rear == NULL){
+        (*q)->rear = new;
     }else{
-        rear->next = new;
-        rear = new;
+        (*q)->rear->next = new;
+        (*q)->rear = new;
     }
 
-    if(front == NULL)
-        front = new;
+    if((*q)->front == NULL)
+        (*q)->front = new;
 }
 
-treeNode* dequeue()
+struct TreeNode* dequeue(struct queue **q)
 {
-    if(isEmpty()){
+    if(isEmpty(*q)){
         printf("Sequential Queue is Empty.\n");
         return NULL;
     }
 
     //pop front
-    queueNode *temp = front;
-    treeNode *data = temp->data;
-    front = temp->next;
+    struct queueNode *temp = (*q)->front;
+    struct TreeNode *data = temp->data;
+    (*q)->front = temp->next;
     free(temp);
     return data;
 }
 
 //tree operation
-void insert(int data){
+void insert(struct TreeNode **root, struct queue **q, int data){
     printf("Tree insert %d\n", data);
-    treeNode *new = (treeNode*)malloc(sizeof(treeNode));
+    struct TreeNode *new = (struct TreeNode*)malloc(sizeof(struct TreeNode));
     new->data = data;
     new->left = NULL;
     new->right = NULL;
 
     //Queue contain the tree node which is not complete.
-    if(root == NULL){
-        root = new;
+    if(*root == NULL){
+        *root = new;
     }else{
         //get from queue
-        treeNode *temp = front->data;
+        struct TreeNode *temp = (*q)->front->data;
         printf("peek the front : %d\n", temp->data);
 
         if(temp->left == NULL){
             temp->left = new;
         }else{
             temp->right = new;
-            dequeue();
+            dequeue(q);
         }
     }
 
     //enqueue the tree node
-    enqueue(new);
+    enqueue(q, new);
 }
 
 //traversal
-void preorderTraversal(treeNode *parent)
+void preorderTraversal(struct TreeNode *parent)
 {
     if(parent == NULL)
         return;
@@ -112,7 +112,7 @@ void preorderTraversal(treeNode *parent)
     preorderTraversal(parent->right);
 }
 
-void inorderTraversal(treeNode *parent)
+void inorderTraversal(struct TreeNode *parent)
 {
     if(parent == NULL)
         return;
@@ -122,7 +122,7 @@ void inorderTraversal(treeNode *parent)
     inorderTraversal(parent->right);
 }
 
-void postorderTraversal(treeNode *parent)
+void postorderTraversal(struct TreeNode *parent)
 {
     if(parent == NULL)
         return;
@@ -134,25 +134,56 @@ void postorderTraversal(treeNode *parent)
 
 /*==============================================================*/
 int main(){
-    int test[10]={0,1,2,3,4,5,6,7,8,9};
-    int size = sizeof(test)/sizeof(int);
-    printf("size is : %d\n", size);
+    int test1[10]={0,1,2,3,4,5,6,7,8,9};
+    int test2[10]={9,8,7,6,5,4,3,2,1,0};
+    int size1 = sizeof(test1)/sizeof(int);
+    printf("size 1 is : %d\n", size1);
 
-    for(int i=0; i<size; i++){
-        insert(test[i]);
+    int size2 = sizeof(test2)/sizeof(int);
+    printf("size 2 is : %d\n", size2);
+
+    struct TreeNode *tree1 = NULL;
+    struct TreeNode *tree2 = NULL;
+
+    struct queue *q1 = malloc(sizeof(struct queue));
+    q1->front = NULL;
+    q1->rear = NULL;
+    struct queue *q2 = malloc(sizeof(struct queue));
+    q2->front = NULL;
+    q2->rear = NULL;
+
+    for(int i=0; i<size1; i++){
+        insert(&tree1, &q1, test1[i]);
+    }
+
+    for(int i=0; i<size2; i++){
+        insert(&tree2, &q2, test2[i]);
     }
 
     //traverse and print the tree
     printf("Preorder Traversal : ");
-    preorderTraversal(root);
+    preorderTraversal(tree1);
     printf("\n");
 
     printf("Inorder Traversal : ");
-    inorderTraversal(root);
+    inorderTraversal(tree1);
     printf("\n");
 
     printf("Postorder Traversal : ");
-    postorderTraversal(root);
+    postorderTraversal(tree1);
+    printf("\n");
+
+    //traverse and print the tree
+    printf("Preorder Traversal : ");
+    preorderTraversal(tree2);
+    printf("\n");
+
+    printf("Inorder Traversal : ");
+    inorderTraversal(tree2);
+    printf("\n");
+
+    printf("Postorder Traversal : ");
+    postorderTraversal(tree2);
     printf("\n");
 
     return 0;
