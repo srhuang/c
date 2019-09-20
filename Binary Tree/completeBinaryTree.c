@@ -139,7 +139,7 @@ int main(){
     printf("size is : %d\n", size);
 
     for(int i=0; i<size; i++){
-        insert(i);
+        insert(test[i]);
     }
 
     //traverse and print the tree
